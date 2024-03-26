@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="form.css"> </head>
 <body>
     <h1>Student Details Form</h1>
-    <form id="studentForm" method="post" action="process_form.php" onsubmit="formValidate()" autocomplete="on">
+    <form id="studentForm" method="post" action="process_form.php" onsubmit="formValidate()" autocomplete="off">
         <label for="name">Name (Legal/Official):</label>
         <input type="text" name="name" pattern="^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$" id="name" required>
         <br>
