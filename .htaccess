@@ -1,7 +1,0 @@
-AuthUserFile C:\xampp\htdocs\input_validation\.htpasswd
-AuthName "Password Protected Area"
-AuthType Basic
-
-<limit GET POST>
-require valid-user
-</limit>
