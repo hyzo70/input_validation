@@ -1,22 +1,46 @@
 <?php
-    include('connection.php');
-    if (isset($_POST['submit'])) {
-        $username = $_POST['user'];
-        $password = $_POST['pass'];
+session_start();
 
-        $sql = "select * from login where username = '$username' and password = '$password'";  
-        $result = mysqli_query($conn, $sql);  
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
-        $count = mysqli_num_rows($result);  
-        
-        if($count == 1){  
-            header("Location: form.html");
-        }  
-        else{  
+    include('connection.php');
+    if (isset($_POST['validate'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+         $res = $conn->prepare("SELECT * FROM users WHERE email = ?");
+         $res->bind_param("s", $email);
+         $res->execute();
+         $result = $res->get_result();
+
+         if($result->num_rows == 1){
+            $user = $result->fetch_assoc();
+         if(md5($password) != $user['password']){
+            $_SESSION['email'] = $email;
+            header("Location: form.php");
+            exit; 
+         }  
+         else{ 
+             echo  '<script>
+                         window.location.href = "index.php";
+                         alert("Login failed. Invalid username or password!")
+                     </script>'; 
+         }
+        } 
+        else{
             echo  '<script>
-                        window.location.href = "index.php";
-                        alert("Login failed. Invalid username or password!!")
-                    </script>';
-        }     
-    }
+                         window.location.href = "index.php";
+                         alert("Login failed. Invalid username or password!")
+                     </script>';
+        }
+}
+
+     if (isset($_POST['record'])) {
+         $email = $_POST['email'];
+         $password = $_POST['password'];
+
+         $enc_password = md5($password);
+         $conn->query("insert into users values('$email','$enc_password')");
+     }
+    
     ?>
+
+    

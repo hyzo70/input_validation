@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="form.css"> </head>
 <body>
     <h1>Student Details Form</h1>
-    <form id="studentForm" method="post" action="process_form.php" onsubmit="formValidate()" autocomplete="off">
+    <form id="studentForm" method="post" action="process_form.php" onsubmit="formValidate()" autocomplete="on">
         <label for="name">Name (Legal/Official):</label>
         <input type="text" name="name" pattern="^[a-zA-Z]+(?: [a-zA-Z]+(?: [a-zA-Z]+(?: (?:bin|ibn) )*[a-zA-Z]+)*)*(?: @ [a-zA-Z]+)?$" id="name" required>
         <br>
@@ -30,6 +33,7 @@
         <input type="tel" name="homePhoneNo" pattern="^\+?[0-9]{2,}[0-9]{7,}$" id="homePhoneNo">
         <br>
         <button type="submit">Submit</button>
+        <a href="logout.php">Logout</a>
     </form>
     <script src="form.js"></script>
 </body>
